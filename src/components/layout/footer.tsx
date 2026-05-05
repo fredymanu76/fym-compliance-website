@@ -1,15 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
+import { ExternalLink } from "lucide-react";
+
+const footerSolutions = [
+  { label: "RegNexus Platform", href: "https://reg-nexus.com", external: true },
+  { label: "RegNexus RIOS", href: "/solutions", external: false },
+  { label: "FirmMail", href: "https://mail.reg-nexus.com", external: true },
+  { label: "Timber OS", href: "https://timber-os.vercel.app", external: true },
+  { label: "Care OS", href: "https://care-os-iota.vercel.app", external: true },
+  { label: "RegNexus Books", href: "https://books.reg-nexus.com", external: true },
+  { label: "RegNexus Cortex", href: "/solutions", external: false },
+];
 
 const footerLinks = {
-  solutions: [
-    { label: "RegNexus Platform", href: "/solutions" },
-    { label: "RegNexus RIOS", href: "/solutions" },
-    { label: "FirmMail", href: "/solutions" },
-    { label: "Timber OS", href: "/solutions" },
-    { label: "Care OS", href: "/solutions" },
-  ],
   expertise: [
     { label: "Banking", href: "/expertise" },
     { label: "Compliance", href: "/expertise" },
@@ -20,6 +24,7 @@ const footerLinks = {
   company: [
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
+    { label: "Book a Call", href: "/book" },
   ],
 };
 
@@ -49,14 +54,26 @@ export function Footer() {
               Solutions
             </h3>
             <ul className="space-y-2.5">
-              {footerLinks.solutions.map((link) => (
+              {footerSolutions.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-text-muted hover:text-text-primary transition-colors"
-                  >
-                    {link.label}
-                  </Link>
+                  {link.external ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-text-primary transition-colors"
+                    >
+                      {link.label}
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className="text-sm text-text-muted hover:text-text-primary transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

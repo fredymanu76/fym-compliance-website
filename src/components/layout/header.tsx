@@ -13,6 +13,7 @@ const navItems: NavItem[] = [
   { label: "Expertise", href: "/expertise" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
+  { label: "Book a Call", href: "/book" },
 ];
 
 export function Header() {

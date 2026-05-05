@@ -2,7 +2,6 @@ export interface Solution {
   name: string;
   tagline: string;
   description: string;
-  tier: "primary" | "specialist" | "supporting";
   color: string;
   url?: string;
 }

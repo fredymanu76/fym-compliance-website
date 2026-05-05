@@ -5,9 +5,6 @@ import { solutions } from "@/lib/solutions";
 import { ExternalLink } from "lucide-react";
 
 export function SolutionsGrid() {
-  const primarySolutions = solutions.filter((s) => s.tier === "primary");
-  const otherSolutions = solutions.filter((s) => s.tier !== "primary");
-
   return (
     <section className="py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -27,9 +24,8 @@ export function SolutionsGrid() {
           </p>
         </motion.div>
 
-        {/* Primary Solutions */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          {primarySolutions.map((solution, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {solutions.map((solution, i) => (
             <motion.div
               key={solution.name}
               initial={{ opacity: 0, y: 20 }}
@@ -61,28 +57,6 @@ export function SolutionsGrid() {
                   <ExternalLink className="h-3 w-3" />
                 </a>
               )}
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Other Solutions */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {otherSolutions.map((solution, i) => (
-            <motion.div
-              key={solution.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05, duration: 0.4 }}
-              className="glass rounded-lg p-5 hover:bg-bg-subtle/50 transition-colors"
-            >
-              <div
-                className={`h-0.5 w-8 rounded-full bg-${solution.color} mb-3`}
-              />
-              <h3 className="text-sm font-semibold text-text-primary mb-1">
-                {solution.name}
-              </h3>
-              <p className="text-xs text-text-muted">{solution.tagline}</p>
             </motion.div>
           ))}
         </div>
