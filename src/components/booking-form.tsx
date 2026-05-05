@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent, useRef, useEffect, useMemo } from "react";
+import { useState, FormEvent, useRef, useEffect, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -131,9 +131,7 @@ export function BookingForm() {
   >("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [turnstileToken, setTurnstileToken] = useState("");
-  const turnstileRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string>("");
-  const scriptLoadedRef = useRef(false);
 
   // Load Turnstile script on mount
   useEffect(() => {
@@ -141,23 +139,19 @@ export function BookingForm() {
     script.src =
       "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
     script.async = true;
-    script.onload = () => {
-      scriptLoadedRef.current = true;
-    };
     document.head.appendChild(script);
     return () => {
       document.head.removeChild(script);
     };
   }, []);
 
-  // Render Turnstile widget when step 3 becomes active and ref is in DOM
-  useEffect(() => {
-    if (step !== 3) return;
-    if (widgetIdRef.current) return; // already rendered
+  // Callback ref — fires when the Turnstile container DOM element actually mounts
+  const turnstileCallbackRef = useCallback((node: HTMLDivElement | null) => {
+    if (!node) return;
 
     function tryRender() {
-      if (window.turnstile && turnstileRef.current) {
-        widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+      if (window.turnstile && node) {
+        widgetIdRef.current = window.turnstile.render(node, {
           sitekey:
             process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
             "0x4AAAAAADJczhQkgf09SZzh",
@@ -167,19 +161,18 @@ export function BookingForm() {
       }
     }
 
-    if (scriptLoadedRef.current) {
+    if (window.turnstile) {
       tryRender();
     } else {
-      // Script still loading — poll briefly
+      // Script still loading — poll until ready
       const interval = setInterval(() => {
         if (window.turnstile) {
           clearInterval(interval);
           tryRender();
         }
       }, 100);
-      return () => clearInterval(interval);
     }
-  }, [step]);
+  }, []);
 
   const monthDays = useMemo(
     () => getMonthDays(currentMonth.year, currentMonth.month),
@@ -585,7 +578,7 @@ export function BookingForm() {
               </div>
 
               {/* Turnstile widget */}
-              <div ref={turnstileRef} />
+              <div ref={turnstileCallbackRef} />
 
               {status === "error" && (
                 <div className="flex items-center gap-2 text-sm text-facet-red">
