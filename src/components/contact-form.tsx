@@ -11,7 +11,7 @@ declare global {
     turnstile?: {
       render: (
         container: string | HTMLElement,
-        options: { sitekey: string; callback: (token: string) => void }
+        options: { sitekey: string; theme?: string; callback: (token: string) => void }
       ) => string;
       reset: (widgetId: string) => void;
     };
@@ -33,7 +33,8 @@ export function ContactForm() {
     script.onload = () => {
       if (window.turnstile && turnstileRef.current) {
         widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
-          sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "0x4AAAAAAA_placeholder",
+          sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "0x4AAAAAAC8sXk5lDu6fOjhX",
+          theme: "dark",
           callback: (token: string) => setTurnstileToken(token),
         });
       }

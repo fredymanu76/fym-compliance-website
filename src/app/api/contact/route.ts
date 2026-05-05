@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY || "";
-const FIRMMAIL_API_URL = process.env.FIRMMAIL_API_URL || "https://mail.reg-nexus.com/api/hosting/contact";
-const FIRMMAIL_SITE_ID = process.env.FIRMMAIL_SITE_ID || "";
+const FIRMMAIL_API_URL =
+  process.env.FIRMMAIL_API_URL ||
+  "https://mail.reg-nexus.com/api/public/contact-form";
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,37 +24,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verify Turnstile token
-    const turnstileRes = await fetch(
-      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          secret: TURNSTILE_SECRET,
-          response: turnstileToken,
-        }),
-      }
-    );
-
-    const turnstileData = await turnstileRes.json();
-    if (!turnstileData.success) {
-      return NextResponse.json(
-        { error: "Security verification failed. Please try again." },
-        { status: 403 }
-      );
-    }
-
-    // Forward to FirmMail API
+    // Forward to FirmMail API — FirmMail handles Turnstile verification server-side
     const firmMailRes = await fetch(FIRMMAIL_API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        siteId: FIRMMAIL_SITE_ID,
+        siteDomain: "fymcompliancelimited.com",
         name,
         email,
         subject,
         message,
+        turnstileToken,
       }),
     });
 

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { MobileNav } from "./mobile-nav";
@@ -23,7 +24,7 @@ export function Header() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-lg diamond-gradient opacity-90" />
+            <Image src="/logo.png" alt="FYM Compliance" width={36} height={36} className="h-9 w-9" />
             <span className="text-lg font-semibold text-text-primary heading-tight">
               FYM Compliance
             </span>

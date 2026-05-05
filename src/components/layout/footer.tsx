@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 
 const footerLinks = {
@@ -30,7 +31,7 @@ export function Footer() {
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <div className="h-8 w-8 rounded-lg diamond-gradient opacity-90" />
+              <Image src="/logo.png" alt="FYM Compliance" width={32} height={32} className="h-8 w-8" />
               <span className="text-base font-semibold text-text-primary">
                 FYM Compliance
               </span>

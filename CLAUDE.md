@@ -29,10 +29,13 @@
 - Framer Motion for scroll-triggered animations
 
 ## Environment Variables
-- `NEXT_PUBLIC_TURNSTILE_SITE_KEY` — Cloudflare Turnstile site key
-- `TURNSTILE_SECRET_KEY` — Cloudflare Turnstile secret key
-- `FIRMMAIL_API_URL` — FirmMail contact API endpoint
-- `FIRMMAIL_SITE_ID` — FirmMail hosting site ID
+- `NEXT_PUBLIC_TURNSTILE_SITE_KEY` — Cloudflare Turnstile site key (default: 0x4AAAAAAC8sXk5lDu6fOjhX)
+- `FIRMMAIL_API_URL` — FirmMail contact API endpoint (default: https://mail.reg-nexus.com/api/public/contact-form)
+- Turnstile verification is handled server-side by FirmMail — no secret key needed here
+
+## Contact Form
+- FirmMail HostingSite record: siteDomain=fymcompliancelimited.com, recipients=[info@fymcompliancelimited.com]
+- Turnstile widget must include fymcompliancelimited.com in allowed domains (Cloudflare dashboard)
 
 ## Important Notes
 - Dream OS is a PRIVATE project — must NOT appear anywhere on this site

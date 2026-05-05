@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import {
@@ -38,7 +39,7 @@ export function MobileNav({ items }: MobileNavProps) {
         <div className="flex flex-col gap-6 pt-8">
           <div className="flex items-center px-2">
             <div className="flex items-center gap-3">
-              <div className="h-8 w-8 rounded-lg diamond-gradient opacity-90" />
+              <Image src="/logo.png" alt="FYM Compliance" width={32} height={32} className="h-8 w-8" />
               <span className="text-base font-semibold text-text-primary">
                 FYM Compliance
               </span>
