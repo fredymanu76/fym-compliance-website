@@ -133,13 +133,29 @@ export function BookingForm() {
   const [turnstileToken, setTurnstileToken] = useState("");
   const turnstileRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string>("");
+  const scriptLoadedRef = useRef(false);
 
+  // Load Turnstile script on mount
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
       "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
     script.async = true;
     script.onload = () => {
+      scriptLoadedRef.current = true;
+    };
+    document.head.appendChild(script);
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
+  // Render Turnstile widget when step 3 becomes active and ref is in DOM
+  useEffect(() => {
+    if (step !== 3) return;
+    if (widgetIdRef.current) return; // already rendered
+
+    function tryRender() {
       if (window.turnstile && turnstileRef.current) {
         widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
           sitekey:
@@ -149,12 +165,21 @@ export function BookingForm() {
           callback: (token: string) => setTurnstileToken(token),
         });
       }
-    };
-    document.head.appendChild(script);
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
+    }
+
+    if (scriptLoadedRef.current) {
+      tryRender();
+    } else {
+      // Script still loading — poll briefly
+      const interval = setInterval(() => {
+        if (window.turnstile) {
+          clearInterval(interval);
+          tryRender();
+        }
+      }, 100);
+      return () => clearInterval(interval);
+    }
+  }, [step]);
 
   const monthDays = useMemo(
     () => getMonthDays(currentMonth.year, currentMonth.month),
