@@ -33,7 +33,7 @@ export function ContactForm() {
     script.onload = () => {
       if (window.turnstile && turnstileRef.current) {
         widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
-          sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "0x4AAAAAAC8sXk5lDu6fOjhX",
+          sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "0x4AAAAAADJczhQkgf09SZzh",
           theme: "dark",
           callback: (token: string) => setTurnstileToken(token),
         });
