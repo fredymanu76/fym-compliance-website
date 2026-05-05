@@ -25,9 +25,13 @@ export async function POST(request: NextRequest) {
     }
 
     // Forward to FirmMail API — FirmMail handles Turnstile verification server-side
+    // Origin header required: FirmMail validates the calling site via Origin
     const firmMailRes = await fetch(FIRMMAIL_API_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Origin": "https://fymcompliancelimited.com",
+      },
       body: JSON.stringify({
         siteDomain: "fymcompliancelimited.com",
         name,
