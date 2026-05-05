@@ -88,10 +88,18 @@ export function ContactForm() {
       <div className="glass rounded-xl p-10 text-center">
         <CheckCircle className="h-12 w-12 text-facet-green mx-auto mb-4" />
         <h3 className="text-lg font-semibold text-text-primary mb-2">
-          Message Sent
+          Thank You for Getting in Touch
         </h3>
+        <p className="text-sm text-text-muted mb-4">
+          We appreciate you reaching out to us. Your message has been received
+          and a member of our team will respond shortly.
+        </p>
         <p className="text-sm text-text-muted">
-          Thank you for your enquiry. We&apos;ll respond within 24 hours.
+          If you have not heard from us within 3 hours, please contact us
+          directly on{" "}
+          <a href="tel:+447465991845" className="text-facet-amber hover:underline font-medium">
+            +44 7465 991845
+          </a>
         </p>
       </div>
     );

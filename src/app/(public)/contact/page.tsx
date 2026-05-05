@@ -23,7 +23,7 @@ export default function ContactPage() {
             <p className="text-lg text-text-muted leading-relaxed">
               Whether you need a bespoke regulatory platform, specialist
               industry solution, or want to discuss technology advisory — reach
-              out and we&apos;ll respond within 24 hours.
+              out and we&apos;ll respond shortly.
             </p>
           </motion.div>
         </div>
@@ -71,9 +71,14 @@ export default function ContactPage() {
                     Response Time
                   </h3>
                 </div>
+                <p className="text-sm text-text-muted mb-2">
+                  We aim to respond to all enquiries promptly during business hours.
+                </p>
                 <p className="text-sm text-text-muted">
-                  We respond to all enquiries within 24 hours during business
-                  days.
+                  Direct line:{" "}
+                  <a href="tel:+447465991845" className="text-facet-amber hover:underline font-medium">
+                    +44 7465 991845
+                  </a>
                 </p>
               </div>
 
