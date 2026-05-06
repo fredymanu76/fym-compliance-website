@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { expertiseDomains } from "@/lib/expertise";
@@ -16,7 +17,6 @@ import {
   CheckCircle,
   ArrowRight,
 } from "lucide-react";
-import { CtaSection } from "@/components/sections/cta-section";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Landmark,
@@ -45,36 +45,25 @@ const defaultColors = domainColors.Banking;
 const engagements = [
   {
     title: "FCA Authorisation \u2014 EMI Applicant (UK)",
-    challenge: "Application rejected due to weak AML and safeguarding model",
-    intervention: "Rebuilt business plan, AML framework, governance map",
+    summary: "Rebuilt a failed application with compliant business plan, AML framework, and safeguarding model.",
     outcome: "Authorisation secured on resubmission",
     border: "border-l-blue-600",
   },
   {
-    title: "Money Remittance Firm \u2014 Compliance Remediation",
-    challenge: "Regulatory gaps in AML monitoring and reporting",
-    intervention: "Implemented full AML/CTF framework and SAR procedures",
-    outcome: "Passed regulatory review with no material findings",
+    title: "Payment Institution \u2014 Compliance Remediation",
+    summary: "Implemented full AML/CTF framework and SM&CR governance structure from the ground up.",
+    outcome: "Framework implemented and operational",
     border: "border-l-emerald-600",
   },
   {
-    title: "Payment Institution \u2014 Governance Overhaul",
-    challenge: "Incomplete SM&CR framework and compliance monitoring",
-    intervention: "Full SM&CR implementation, board reporting redesign",
-    outcome: "Framework implemented and operational",
-    border: "border-l-indigo-600",
-  },
-  {
     title: "Fintech Startup \u2014 Market Entry Strategy",
-    challenge: "Undefined regulatory pathway for UK launch",
-    intervention: "Designed authorisation strategy and operating model",
-    outcome: "Clear FCA roadmap and investor-ready regulatory structure",
+    summary: "Designed authorisation strategy and operating model for structured UK market entry.",
+    outcome: "Investor-ready regulatory structure delivered",
     border: "border-l-amber-600",
   },
   {
     title: "Investment Firm \u2014 Prudential Compliance",
-    challenge: "MIFIDPRU gaps with no prudential reporting capability",
-    intervention: "ICAAP/ILAAP design, capital modelling, reporting build",
+    summary: "Delivered ICARA process, capital modelling, and risk frameworks aligned with MIFIDPRU.",
     outcome: "Regulatory approval obtained",
     border: "border-l-violet-600",
   },
@@ -83,8 +72,16 @@ const engagements = [
 export default function ExpertisePage() {
   return (
     <>
-      {/* Header */}
-      <section className="py-24 sm:py-32">
+      {/* Hero — Navy banner */}
+      <section className="relative overflow-hidden bg-bg-navy py-24 sm:py-32">
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80"
+            alt="Corporate skyline"
+            fill
+            className="object-cover opacity-20"
+          />
+        </div>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -92,25 +89,25 @@ export default function ExpertisePage() {
             transition={{ duration: 0.5 }}
             className="max-w-3xl"
           >
-            <p className="text-sm font-semibold text-corp-blue uppercase tracking-widest mb-3">
-              What We Know
+            <p className="text-sm font-semibold text-corp-blue-light uppercase tracking-widest mb-4">
+              Specialist Knowledge
             </p>
-            <h1 className="text-4xl sm:text-5xl font-bold heading-tight mb-6 text-text-primary">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold heading-tight mb-6 text-white leading-[1.1]">
               Regulatory & Commercial{" "}
-              <span className="text-corp-blue">Expertise</span>
+              <span className="text-corp-blue-light">Expertise</span>
             </h1>
-            <p className="text-lg text-text-secondary leading-relaxed">
-              Deep specialist knowledge across 8 domains of regulated financial
+            <p className="text-lg text-white/70 leading-relaxed max-w-2xl">
+              Deep domain knowledge across 8 areas of regulated financial
               services, informing every engagement we deliver.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Expertise Grid */}
-      <section className="pb-24">
+      {/* Expertise Grid — compact 4-col, 3 items max */}
+      <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {expertiseDomains.map((domain, i) => {
               const Icon = iconMap[domain.icon];
               const colors = domainColors[domain.name] || defaultColors;
@@ -121,23 +118,23 @@ export default function ExpertisePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05, duration: 0.4 }}
-                  className={`card-corporate p-7 group border-t-2 ${colors.topBorder}`}
+                  className={`card-corporate p-6 group border-t-2 ${colors.topBorder}`}
                 >
-                  <div className="flex items-center gap-3 mb-6">
+                  <div className="flex items-center gap-3 mb-5">
                     {Icon && (
-                      <div className={`flex items-center justify-center h-11 w-11 rounded-lg border ${colors.iconBg} ${colors.iconBorder} ${colors.iconHoverBg} ${colors.iconHoverBorder} transition-colors`}>
+                      <div className={`flex items-center justify-center h-10 w-10 rounded-lg border ${colors.iconBg} ${colors.iconBorder} ${colors.iconHoverBg} ${colors.iconHoverBorder} transition-colors`}>
                         <Icon className={`h-5 w-5 ${colors.iconText} group-hover:text-white transition-colors`} />
                       </div>
                     )}
-                    <h2 className="text-lg font-bold text-text-primary tracking-tight">
+                    <h2 className="text-sm font-bold text-text-primary tracking-tight">
                       {domain.name}
                     </h2>
                   </div>
-                  <ul className="space-y-3">
-                    {domain.areas.map((area) => (
-                      <li key={area} className="flex items-start gap-3">
-                        <ChevronRight className={`h-4 w-4 ${colors.chevron} mt-0.5 shrink-0`} />
-                        <span className="text-sm font-medium text-text-secondary leading-relaxed">
+                  <ul className="space-y-2">
+                    {domain.areas.slice(0, 3).map((area) => (
+                      <li key={area} className="flex items-start gap-2">
+                        <ChevronRight className={`h-3.5 w-3.5 ${colors.chevron} mt-0.5 shrink-0`} />
+                        <span className="text-xs font-medium text-text-secondary leading-snug">
                           {area}
                         </span>
                       </li>
@@ -150,75 +147,63 @@ export default function ExpertisePage() {
         </div>
       </section>
 
-      {/* Selected Engagements */}
-      <section className="py-24 bg-bg-secondary">
+      {/* Selected Engagements — Navy section */}
+      <section className="py-24 bg-bg-navy relative overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80"
+            alt="Office environment"
+            fill
+            className="object-cover opacity-10"
+          />
+        </div>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="max-w-3xl mb-14"
+            className="text-center mb-14"
           >
-            <p className="text-sm font-semibold text-corp-blue uppercase tracking-widest mb-3">
-              What We&apos;ve Delivered
+            <p className="text-sm font-semibold text-corp-blue-light uppercase tracking-widest mb-3">
+              Track Record
             </p>
-            <h2 className="text-3xl sm:text-4xl font-bold heading-tight mb-4 text-text-primary">
+            <h2 className="text-3xl sm:text-4xl font-bold heading-tight mb-4 text-white">
               Selected Engagements
             </h2>
-            <p className="text-text-secondary text-lg">
-              Practical examples of regulatory execution and client outcomes
-              across payments, banking, and fintech.
+            <p className="text-white/60 text-base max-w-2xl mx-auto">
+              Representative mandates demonstrating regulatory execution and
+              measurable outcomes.
             </p>
           </motion.div>
 
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {engagements.map((item, i) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.4 }}
-                className={`bg-white rounded-lg border border-border shadow-sm p-6 border-l-4 ${item.border}`}
+                className={`bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 p-6 border-l-4 ${item.border}`}
               >
-                <h3 className="text-base font-bold text-text-primary tracking-tight mb-4">
+                <h3 className="text-sm font-bold text-white tracking-tight mb-3">
                   {item.title}
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div>
-                    <p className="text-[11px] font-semibold text-text-muted uppercase tracking-wide mb-1">
-                      Challenge
-                    </p>
-                    <p className="text-sm text-text-secondary leading-relaxed">
-                      {item.challenge}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-semibold text-text-muted uppercase tracking-wide mb-1">
-                      Intervention
-                    </p>
-                    <p className="text-sm text-text-secondary leading-relaxed">
-                      {item.intervention}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-semibold text-text-muted uppercase tracking-wide mb-1">
-                      Outcome
-                    </p>
-                    <div className="flex items-start gap-2">
-                      <CheckCircle className="h-4 w-4 text-emerald-600 mt-0.5 shrink-0" />
-                      <p className="text-sm font-semibold text-text-primary leading-relaxed">
-                        {item.outcome}
-                      </p>
-                    </div>
-                  </div>
+                <p className="text-sm text-white/60 leading-relaxed mb-4">
+                  {item.summary}
+                </p>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-emerald-400 shrink-0" />
+                  <span className="text-sm font-semibold text-white">
+                    {item.outcome}
+                  </span>
                 </div>
               </motion.div>
             ))}
           </div>
 
-          {/* Conversion CTA */}
+          {/* CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -226,12 +211,12 @@ export default function ExpertisePage() {
             transition={{ delay: 0.3, duration: 0.5 }}
             className="mt-14 text-center"
           >
-            <p className="text-text-secondary text-base mb-5">
+            <p className="text-white/50 text-sm mb-5">
               Planning an FCA application or facing regulatory scrutiny?
             </p>
             <Link
               href="/book"
-              className="inline-flex items-center gap-2 px-7 py-3 text-sm font-bold rounded-lg bg-corp-navy text-white hover:bg-corp-navy/90 transition-colors shadow-sm"
+              className="inline-flex items-center gap-2 px-7 py-3 text-sm font-bold rounded-lg bg-white text-corp-navy hover:bg-white/90 transition-colors shadow-sm"
             >
               Book a Consultation
               <ArrowRight className="h-4 w-4" />
@@ -239,8 +224,6 @@ export default function ExpertisePage() {
           </motion.div>
         </div>
       </section>
-
-      <CtaSection />
     </>
   );
 }
