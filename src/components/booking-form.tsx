@@ -39,14 +39,14 @@ const SERVICE_TYPES = [
   },
   {
     id: "demo",
-    label: "Platform Demo",
-    description: "A walkthrough of our platforms tailored to your requirements.",
+    label: "Solution Demo",
+    description: "A walkthrough of our solutions tailored to your requirements.",
   },
   {
     id: "advisory",
-    label: "Technical Advisory",
+    label: "Advisory Consultation",
     description:
-      "In-depth discussion on regulatory technology strategy and architecture.",
+      "In-depth discussion on regulatory solution strategy and delivery approach.",
   },
 ];
 
@@ -155,7 +155,7 @@ export function BookingForm() {
           sitekey:
             process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
             "0x4AAAAAADJczhQkgf09SZzh",
-          theme: "dark",
+          theme: "light",
           callback: (token: string) => setTurnstileToken(token),
         });
       }
@@ -262,32 +262,32 @@ export function BookingForm() {
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="glass rounded-xl p-10 text-center"
+        className="card-corporate p-10 text-center"
       >
-        <CheckCircle className="h-12 w-12 text-facet-green mx-auto mb-4" />
-        <h3 className="text-lg font-semibold text-text-primary mb-2">
+        <CheckCircle className="h-12 w-12 text-green-600 mx-auto mb-4" />
+        <h3 className="text-lg font-bold text-text-primary mb-2">
           Booking Request Received
         </h3>
-        <p className="text-sm text-text-muted mb-4">
+        <p className="text-sm text-text-secondary mb-4">
           Thank you for requesting a{" "}
-          <span className="text-facet-amber font-medium">
+          <span className="text-corp-blue font-medium">
             {SERVICE_TYPES.find((s) => s.id === serviceType)?.label}
           </span>
           .
         </p>
         {selectedDate && selectedTime && (
-          <div className="glass rounded-lg p-4 inline-block mb-4">
+          <div className="bg-bg-secondary rounded-lg p-4 inline-block mb-4 border border-border">
             <p className="text-sm text-text-primary font-medium">
               {formatDate(selectedDate)} at {selectedTime}
             </p>
           </div>
         )}
-        <p className="text-sm text-text-muted">
+        <p className="text-sm text-text-secondary">
           We will review your request and confirm the appointment shortly. If
           you need to reach us sooner, call{" "}
           <a
             href="tel:+447465991845"
-            className="text-facet-amber hover:underline font-medium"
+            className="text-corp-blue hover:underline font-medium"
           >
             +44 7465 991845
           </a>
@@ -300,31 +300,43 @@ export function BookingForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       {/* Step indicators */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2">
         {[
           { num: 1, icon: Calendar, label: "Service" },
           { num: 2, icon: Clock, label: "Date & Time" },
           { num: 3, icon: User, label: "Details" },
-        ].map(({ num, icon: Icon, label }) => (
-          <button
-            key={num}
-            type="button"
-            onClick={() => {
-              if (num < step) setStep(num);
-              if (num === 2 && serviceType) setStep(2);
-              if (num === 3 && selectedDate && selectedTime) setStep(3);
-            }}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              step === num
-                ? "bg-facet-amber/15 text-facet-amber border border-facet-amber/30"
-                : step > num
-                  ? "bg-bg-subtle text-text-primary border border-border"
-                  : "bg-bg-subtle/50 text-text-muted border border-transparent"
-            }`}
-          >
-            <Icon className="h-4 w-4" />
-            <span className="hidden sm:inline">{label}</span>
-          </button>
+        ].map(({ num, icon: Icon, label }, idx) => (
+          <div key={num} className="flex items-center gap-2">
+            {idx > 0 && (
+              <div className={`hidden sm:block w-8 h-px ${step > idx ? "bg-corp-blue" : "bg-border"}`} />
+            )}
+            <button
+              type="button"
+              onClick={() => {
+                if (num < step) setStep(num);
+                if (num === 2 && serviceType) setStep(2);
+                if (num === 3 && selectedDate && selectedTime) setStep(3);
+              }}
+              className={`flex items-center gap-2.5 px-5 py-2.5 rounded-lg text-sm font-bold transition-all ${
+                step === num
+                  ? "bg-corp-navy text-white shadow-md"
+                  : step > num
+                    ? "bg-corp-blue-pale text-corp-navy border border-corp-blue/20"
+                    : "bg-bg-secondary text-text-muted border border-border"
+              }`}
+            >
+              <div className={`flex items-center justify-center h-6 w-6 rounded-full text-xs font-bold ${
+                step === num
+                  ? "bg-white text-corp-navy"
+                  : step > num
+                    ? "bg-corp-blue text-white"
+                    : "bg-border text-text-muted"
+              }`}>
+                {num}
+              </div>
+              <span className="hidden sm:inline">{label}</span>
+            </button>
+          </div>
         ))}
       </div>
 
@@ -339,10 +351,10 @@ export function BookingForm() {
             transition={{ duration: 0.3 }}
             className="space-y-4"
           >
-            <h3 className="text-lg font-semibold text-text-primary">
+            <h3 className="text-lg font-bold text-text-primary">
               Select a Service
             </h3>
-            <div className="grid gap-3">
+            <div className="grid gap-4">
               {SERVICE_TYPES.map((service) => (
                 <button
                   key={service.id}
@@ -351,16 +363,23 @@ export function BookingForm() {
                     setServiceType(service.id);
                     setStep(2);
                   }}
-                  className={`glass rounded-xl p-5 text-left transition-all ${
+                  className={`rounded-xl p-6 text-left transition-all border-2 ${
                     serviceType === service.id
-                      ? "ring-2 ring-facet-amber bg-facet-amber/5"
-                      : "hover:bg-bg-subtle/50"
+                      ? "border-corp-blue bg-corp-blue-pale/40 shadow-md"
+                      : "bg-white border-border hover:border-corp-blue/40 card-shadow hover:shadow-md"
                   }`}
                 >
-                  <p className="text-sm font-semibold text-text-primary mb-1">
-                    {service.label}
-                  </p>
-                  <p className="text-xs text-text-muted">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className={`h-3 w-3 rounded-full border-2 ${
+                      serviceType === service.id
+                        ? "border-corp-blue bg-corp-blue"
+                        : "border-border bg-white"
+                    }`} />
+                    <p className="text-sm font-bold text-text-primary">
+                      {service.label}
+                    </p>
+                  </div>
+                  <p className="text-sm text-text-secondary pl-6">
                     {service.description}
                   </p>
                 </button>
@@ -384,13 +403,13 @@ export function BookingForm() {
             </h3>
 
             {/* Calendar */}
-            <div className="glass rounded-xl p-5">
+            <div className="card-corporate p-5">
               <div className="flex items-center justify-between mb-4">
                 <button
                   type="button"
                   onClick={prevMonth}
                   disabled={!canGoPrev}
-                  className="p-1.5 rounded-lg hover:bg-bg-subtle transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-text-muted"
+                  className="p-1.5 rounded-lg hover:bg-bg-secondary transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-text-secondary"
                 >
                   <ChevronLeft className="h-5 w-5" />
                 </button>
@@ -400,7 +419,7 @@ export function BookingForm() {
                 <button
                   type="button"
                   onClick={nextMonth}
-                  className="p-1.5 rounded-lg hover:bg-bg-subtle transition-colors text-text-muted"
+                  className="p-1.5 rounded-lg hover:bg-bg-secondary transition-colors text-text-secondary"
                 >
                   <ChevronRight className="h-5 w-5" />
                 </button>
@@ -433,10 +452,10 @@ export function BookingForm() {
                       onClick={() => setSelectedDate(day)}
                       className={`aspect-square flex items-center justify-center rounded-lg text-sm transition-all ${
                         selected
-                          ? "bg-facet-amber text-bg-primary font-semibold"
+                          ? "bg-corp-navy text-white font-semibold"
                           : disabled
                             ? "text-text-muted/30 cursor-not-allowed"
-                            : "text-text-primary hover:bg-bg-subtle"
+                            : "text-text-primary hover:bg-bg-secondary"
                       }`}
                     >
                       {day.getDate()}
@@ -465,10 +484,10 @@ export function BookingForm() {
                       key={time}
                       type="button"
                       onClick={() => setSelectedTime(time)}
-                      className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                      className={`px-3 py-2 rounded-lg text-sm font-medium transition-all border ${
                         selectedTime === time
-                          ? "bg-facet-amber text-bg-primary"
-                          : "glass hover:bg-bg-subtle/50 text-text-muted"
+                          ? "bg-corp-navy text-white border-corp-navy"
+                          : "bg-white border-border hover:bg-bg-secondary text-text-secondary"
                       }`}
                     >
                       {time}
@@ -487,7 +506,7 @@ export function BookingForm() {
                 <button
                   type="button"
                   onClick={() => setStep(3)}
-                  className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold rounded-lg bg-facet-amber text-bg-primary hover:bg-facet-amber/90 transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold rounded-lg bg-corp-navy text-white hover:bg-corp-navy/90 transition-colors"
                 >
                   Continue
                   <ChevronRight className="h-4 w-4" />
@@ -512,21 +531,21 @@ export function BookingForm() {
                 Your Details
               </h3>
               {selectedDate && selectedTime && (
-                <div className="glass rounded-lg px-4 py-3 inline-flex items-center gap-3 text-sm">
-                  <span className="text-facet-amber font-medium">
+                <div className="bg-corp-blue-pale rounded-lg px-4 py-3 inline-flex items-center gap-3 text-sm border border-corp-blue/20">
+                  <span className="text-corp-blue font-medium">
                     {SERVICE_TYPES.find((s) => s.id === serviceType)?.label}
                   </span>
-                  <span className="text-text-muted">
+                  <span className="text-text-secondary">
                     {formatDate(selectedDate)} at {selectedTime}
                   </span>
                 </div>
               )}
             </div>
 
-            <div className="glass rounded-xl p-6 space-y-5">
+            <div className="card-corporate p-6 space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-sm text-text-muted">
+                  <Label htmlFor="name" className="text-sm text-text-secondary">
                     Name *
                   </Label>
                   <Input
@@ -534,11 +553,11 @@ export function BookingForm() {
                     name="name"
                     required
                     placeholder="Your full name"
-                    className="bg-bg-subtle border-border text-text-primary placeholder:text-text-muted/50"
+                    className="bg-bg-secondary border-border text-text-primary placeholder:text-text-muted/50"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm text-text-muted">
+                  <Label htmlFor="email" className="text-sm text-text-secondary">
                     Email *
                   </Label>
                   <Input
@@ -547,25 +566,25 @@ export function BookingForm() {
                     type="email"
                     required
                     placeholder="your@email.com"
-                    className="bg-bg-subtle border-border text-text-primary placeholder:text-text-muted/50"
+                    className="bg-bg-secondary border-border text-text-primary placeholder:text-text-muted/50"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="company" className="text-sm text-text-muted">
+                <Label htmlFor="company" className="text-sm text-text-secondary">
                   Company
                 </Label>
                 <Input
                   id="company"
                   name="company"
                   placeholder="Your company (optional)"
-                  className="bg-bg-subtle border-border text-text-primary placeholder:text-text-muted/50"
+                  className="bg-bg-secondary border-border text-text-primary placeholder:text-text-muted/50"
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="notes" className="text-sm text-text-muted">
+                <Label htmlFor="notes" className="text-sm text-text-secondary">
                   Notes
                 </Label>
                 <Textarea
@@ -573,7 +592,7 @@ export function BookingForm() {
                   name="notes"
                   rows={3}
                   placeholder="Anything you'd like us to know before the call... (optional)"
-                  className="bg-bg-subtle border-border text-text-primary placeholder:text-text-muted/50 resize-none"
+                  className="bg-bg-secondary border-border text-text-primary placeholder:text-text-muted/50 resize-none"
                 />
               </div>
 
@@ -581,7 +600,7 @@ export function BookingForm() {
               <div ref={turnstileCallbackRef} />
 
               {status === "error" && (
-                <div className="flex items-center gap-2 text-sm text-facet-red">
+                <div className="flex items-center gap-2 text-sm text-red-600">
                   <AlertCircle className="h-4 w-4" />
                   {errorMsg}
                 </div>
@@ -591,14 +610,14 @@ export function BookingForm() {
                 <button
                   type="button"
                   onClick={() => setStep(2)}
-                  className="px-5 py-2.5 text-sm font-medium rounded-lg border border-border text-text-muted hover:text-text-primary hover:bg-bg-subtle transition-colors"
+                  className="px-5 py-2.5 text-sm font-medium rounded-lg border border-border text-text-secondary hover:text-text-primary hover:bg-bg-secondary transition-colors"
                 >
                   Back
                 </button>
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="inline-flex items-center gap-2 px-7 py-2.5 text-sm font-semibold rounded-lg bg-facet-amber text-bg-primary hover:bg-facet-amber/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="inline-flex items-center gap-2 px-7 py-2.5 text-sm font-semibold rounded-lg bg-corp-navy text-white hover:bg-corp-navy/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {status === "loading"
                     ? "Submitting..."

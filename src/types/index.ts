@@ -3,6 +3,7 @@ export interface Solution {
   tagline: string;
   description: string;
   color: string;
+  image?: string;
   url?: string;
 }
 

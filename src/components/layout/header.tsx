@@ -20,31 +20,34 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 glass-strong">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-border card-shadow">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
             <Image src="/logo.png" alt="FYM Compliance" width={36} height={36} className="h-9 w-9" />
-            <span className="text-lg font-semibold text-text-primary heading-tight">
+            <span className="text-lg font-bold text-corp-navy heading-tight">
               FYM Compliance
             </span>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-0.5">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "px-4 py-2 text-sm font-medium rounded-lg transition-colors",
+                  "relative px-4 py-2 text-sm font-semibold rounded-lg transition-all",
                   pathname === item.href
-                    ? "text-facet-amber bg-bg-subtle"
-                    : "text-text-muted hover:text-text-primary hover:bg-bg-subtle/50"
+                    ? "text-corp-navy bg-corp-blue-pale"
+                    : "text-text-muted hover:text-corp-navy hover:bg-bg-secondary"
                 )}
               >
                 {item.label}
+                {pathname === item.href && (
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-corp-blue rounded-full" />
+                )}
               </Link>
             ))}
           </nav>
@@ -53,7 +56,7 @@ export function Header() {
           <div className="hidden md:block">
             <Link
               href="/contact"
-              className="inline-flex items-center px-5 py-2 text-sm font-semibold rounded-lg bg-facet-amber text-bg-primary hover:bg-facet-amber/90 transition-colors"
+              className="inline-flex items-center px-5 py-2.5 text-sm font-bold rounded-lg bg-corp-navy text-white hover:bg-corp-navy/90 transition-colors shadow-sm"
             >
               Get in Touch
             </Link>

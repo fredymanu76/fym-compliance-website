@@ -9,11 +9,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "FYM Compliance Limited — Regulated Technology Architects",
+    default: "FYM Compliance Limited — Solutions for Regulated Industries",
     template: "%s | FYM Compliance Limited",
   },
   description:
-    "The architects behind regulated technology. Full-stack regulatory technology solutions for financial services, compliance, and specialist industries.",
+    "Premier solutions provider for regulated industries. Comprehensive regulatory solutions for financial services, compliance, and specialist sectors.",
   keywords: [
     "RegTech",
     "regulatory technology",

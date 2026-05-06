@@ -18,15 +18,19 @@
 ## Architecture
 - Route groups: (public) — all pages under public layout with Header + Footer
 - API route: /api/contact — server-side proxy to FirmMail API
+- API route: /api/book — server-side proxy for booking requests
 - Contact form uses Cloudflare Turnstile for bot protection
 - Standalone output for Docker deployment
 
 ## Design System
-- Dark premium institutional — Diamond-Cube facet colors
-- Facet palette: red #E53E3E, orange #ED8936, amber #ECC94B, green #48BB78, blue #4299E1
-- Background: primary #0A0A0F, elevated #12121E, subtle #1A1A2E
-- Glass-morphism panels, Inter font, tight letter-spacing
+- Corporate blue — JP Morgan-style professional theme
+- Primary palette: navy #003A70, blue #0078D4, blue-light #4DA3E8, blue-pale #E8F1FB
+- Accent: gold #B8952A (subtle premium accent)
+- Backgrounds: primary #FFFFFF, secondary #F5F7FA, navy #001D3D
+- Text: primary #1B2A4A, secondary #4A5568, muted #6B7280
+- White cards with subtle shadows, Inter font, tight letter-spacing
 - Framer Motion for scroll-triggered animations
+- Unsplash images for hero, solution cards, and section imagery
 
 ## Environment Variables
 - `NEXT_PUBLIC_TURNSTILE_SITE_KEY` — Cloudflare Turnstile site key (default: 0x4AAAAAAC8sXk5lDu6fOjhX)
@@ -40,4 +44,4 @@
 ## Important Notes
 - Dream OS is a PRIVATE project — must NOT appear anywhere on this site
 - This is the PARENT company website — showcases all public solutions
-- No Supabase — static site with one API route for contact form
+- No Supabase — static site with API routes for contact and booking forms

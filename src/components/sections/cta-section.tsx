@@ -13,18 +13,18 @@ export function CtaSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="glass-strong rounded-2xl p-10 sm:p-16 text-center"
+          className="gradient-blue rounded-2xl p-10 sm:p-16 text-center"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold heading-tight mb-4">
+          <h2 className="text-2xl sm:text-3xl font-bold heading-tight mb-4 text-white">
             Ready to discuss your requirements?
           </h2>
-          <p className="text-text-muted text-base max-w-xl mx-auto mb-8">
-            Whether you need a bespoke regulatory platform, specialist industry
-            solution, or technology advisory — we architect and deliver.
+          <p className="text-white/80 text-base max-w-xl mx-auto mb-8">
+            Whether you need a bespoke regulatory solution, specialist industry
+            platform, or advisory services — we deliver.
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold rounded-lg bg-facet-amber text-bg-primary hover:bg-facet-amber/90 transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold rounded-lg bg-white text-corp-navy hover:bg-white/90 transition-colors"
           >
             Get in Touch
             <ArrowRight className="h-4 w-4" />

@@ -11,21 +11,22 @@
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
 
-  /* Facet colors */
-  --color-facet-red: #E53E3E;
-  --color-facet-orange: #ED8936;
-  --color-facet-amber: #ECC94B;
-  --color-facet-green: #48BB78;
-  --color-facet-blue: #4299E1;
+  /* Corporate palette */
+  --color-corp-navy: #003A70;
+  --color-corp-blue: #0078D4;
+  --color-corp-blue-light: #4DA3E8;
+  --color-corp-blue-pale: #E8F1FB;
+  --color-corp-gold: #B8952A;
 
   /* Background */
-  --color-bg-primary: #0A0A0F;
-  --color-bg-elevated: #12121E;
-  --color-bg-subtle: #1A1A2E;
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #F5F7FA;
+  --color-bg-navy: #001D3D;
 
   /* Text */
-  --color-text-primary: #F0EDE8;
-  --color-text-muted: #9B978F;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #1E293B;
+  --color-text-muted: #475569;
 
   /* shadcn tokens */
   --color-sidebar-ring: var(--sidebar-ring);
@@ -67,38 +68,38 @@
 }
 
 :root {
-  --background: #0A0A0F;
-  --foreground: #F0EDE8;
-  --card: #12121E;
-  --card-foreground: #F0EDE8;
-  --popover: #12121E;
-  --popover-foreground: #F0EDE8;
-  --primary: #ECC94B;
-  --primary-foreground: #0A0A0F;
-  --secondary: #1A1A2E;
-  --secondary-foreground: #F0EDE8;
-  --muted: #1A1A2E;
-  --muted-foreground: #9B978F;
-  --accent: #1A1A2E;
-  --accent-foreground: #F0EDE8;
-  --destructive: #E53E3E;
-  --border: rgba(240, 237, 232, 0.1);
-  --input: rgba(240, 237, 232, 0.12);
-  --ring: #ECC94B;
-  --chart-1: #E53E3E;
-  --chart-2: #ED8936;
-  --chart-3: #ECC94B;
-  --chart-4: #48BB78;
-  --chart-5: #4299E1;
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+  --card: #FFFFFF;
+  --card-foreground: #0F172A;
+  --popover: #FFFFFF;
+  --popover-foreground: #0F172A;
+  --primary: #003A70;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F5F7FA;
+  --secondary-foreground: #0F172A;
+  --muted: #F5F7FA;
+  --muted-foreground: #475569;
+  --accent: #E8F1FB;
+  --accent-foreground: #003A70;
+  --destructive: #DC2626;
+  --border: #CBD5E1;
+  --input: #CBD5E1;
+  --ring: #0078D4;
+  --chart-1: #003A70;
+  --chart-2: #0078D4;
+  --chart-3: #4DA3E8;
+  --chart-4: #B8952A;
+  --chart-5: #E8F1FB;
   --radius: 0.625rem;
-  --sidebar: #12121E;
-  --sidebar-foreground: #F0EDE8;
-  --sidebar-primary: #ECC94B;
-  --sidebar-primary-foreground: #0A0A0F;
-  --sidebar-accent: #1A1A2E;
-  --sidebar-accent-foreground: #F0EDE8;
-  --sidebar-border: rgba(240, 237, 232, 0.1);
-  --sidebar-ring: #ECC94B;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #0F172A;
+  --sidebar-primary: #003A70;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #E8F1FB;
+  --sidebar-accent-foreground: #003A70;
+  --sidebar-border: #CBD5E1;
+  --sidebar-ring: #0078D4;
 }
 
 @layer base {
@@ -106,7 +107,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-bg-primary text-text-primary;
+    @apply bg-white text-text-primary;
   }
   html {
     @apply font-sans;
@@ -114,41 +115,46 @@
 }
 
 @layer utilities {
-  .glass {
-    background: rgba(18, 18, 30, 0.6);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(240, 237, 232, 0.08);
+  .card-corporate {
+    background: #FFFFFF;
+    border: 1px solid #CBD5E1;
+    border-radius: 0.75rem;
+    box-shadow:
+      0 1px 3px rgba(0, 58, 112, 0.06),
+      0 4px 12px rgba(0, 58, 112, 0.04);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
   }
 
-  .glass-strong {
-    background: rgba(18, 18, 30, 0.8);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(240, 237, 232, 0.12);
+  .card-corporate:hover {
+    box-shadow:
+      0 4px 16px rgba(0, 58, 112, 0.10),
+      0 8px 24px rgba(0, 58, 112, 0.06);
+    transform: translateY(-2px);
   }
 
-  .diamond-gradient {
-    background: linear-gradient(
-      135deg,
-      #E53E3E 0%,
-      #ED8936 25%,
-      #ECC94B 50%,
-      #48BB78 75%,
-      #4299E1 100%
-    );
+  .card-shadow {
+    box-shadow:
+      0 1px 3px rgba(0, 58, 112, 0.06),
+      0 4px 12px rgba(0, 58, 112, 0.04);
   }
 
-  .diamond-gradient-text {
-    background: linear-gradient(
-      135deg,
-      #E53E3E 0%,
-      #ED8936 25%,
-      #ECC94B 50%,
-      #48BB78 75%,
-      #4299E1 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .card-shadow-hover {
+    box-shadow:
+      0 4px 16px rgba(0, 58, 112, 0.10),
+      0 8px 24px rgba(0, 58, 112, 0.06);
+  }
+
+  .gradient-blue {
+    background: linear-gradient(135deg, #003A70 0%, #0078D4 100%);
+  }
+
+  .section-navy {
+    background-color: #001D3D;
+    color: #FFFFFF;
+  }
+
+  .section-light {
+    background-color: #F5F7FA;
   }
 
   .heading-tight {

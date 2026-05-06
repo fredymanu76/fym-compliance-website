@@ -27,20 +27,20 @@ export function MobileNav({ items }: MobileNavProps) {
       <SheetTrigger
         render={
           <button
-            className="p-2 text-text-muted hover:text-text-primary transition-colors"
+            className="p-2 text-text-primary hover:text-corp-navy transition-colors"
             aria-label="Open menu"
           >
             <Menu className="h-6 w-6" />
           </button>
         }
       />
-      <SheetContent side="right" className="w-80 bg-bg-elevated border-border" showCloseButton={false}>
+      <SheetContent side="right" className="w-80 bg-white border-border" showCloseButton={false}>
         <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
         <div className="flex flex-col gap-6 pt-8">
           <div className="flex items-center px-2">
             <div className="flex items-center gap-3">
               <Image src="/logo.png" alt="FYM Compliance" width={32} height={32} className="h-8 w-8" />
-              <span className="text-base font-semibold text-text-primary">
+              <span className="text-base font-bold text-corp-navy">
                 FYM Compliance
               </span>
             </div>
@@ -53,10 +53,10 @@ export function MobileNav({ items }: MobileNavProps) {
                 href={item.href}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  "px-4 py-3 text-base font-medium rounded-lg transition-colors",
+                  "px-4 py-3 text-base font-semibold rounded-lg transition-all",
                   pathname === item.href
-                    ? "text-facet-amber bg-bg-subtle"
-                    : "text-text-muted hover:text-text-primary hover:bg-bg-subtle/50"
+                    ? "text-corp-navy bg-corp-blue-pale border-l-[3px] border-corp-blue"
+                    : "text-text-muted hover:text-corp-navy hover:bg-bg-secondary"
                 )}
               >
                 {item.label}
@@ -68,7 +68,7 @@ export function MobileNav({ items }: MobileNavProps) {
             <Link
               href="/contact"
               onClick={() => setOpen(false)}
-              className="flex items-center justify-center w-full px-5 py-3 text-sm font-semibold rounded-lg bg-facet-amber text-bg-primary hover:bg-facet-amber/90 transition-colors"
+              className="flex items-center justify-center w-full px-5 py-3 text-sm font-bold rounded-lg bg-corp-navy text-white hover:bg-corp-navy/90 transition-colors shadow-sm"
             >
               Get in Touch
             </Link>

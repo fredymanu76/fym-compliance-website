@@ -34,7 +34,7 @@ export function ContactForm() {
       if (window.turnstile && turnstileRef.current) {
         widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
           sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "0x4AAAAAADJczhQkgf09SZzh",
-          theme: "dark",
+          theme: "light",
           callback: (token: string) => setTurnstileToken(token),
         });
       }
@@ -85,19 +85,19 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="glass rounded-xl p-10 text-center">
-        <CheckCircle className="h-12 w-12 text-facet-green mx-auto mb-4" />
+      <div className="card-corporate p-10 text-center">
+        <CheckCircle className="h-12 w-12 text-green-600 mx-auto mb-4" />
         <h3 className="text-lg font-semibold text-text-primary mb-2">
           Thank You for Getting in Touch
         </h3>
-        <p className="text-sm text-text-muted mb-4">
+        <p className="text-sm text-text-secondary mb-4">
           We appreciate you reaching out to us. Your message has been received
           and a member of our team will respond shortly.
         </p>
-        <p className="text-sm text-text-muted">
+        <p className="text-sm text-text-secondary">
           If you have not heard from us within 3 hours, please contact us
           directly on{" "}
-          <a href="tel:+447465991845" className="text-facet-amber hover:underline font-medium">
+          <a href="tel:+447465991845" className="text-corp-blue hover:underline font-medium">
             +44 7465 991845
           </a>
         </p>
@@ -106,10 +106,10 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="glass rounded-xl p-8 space-y-6">
+    <form onSubmit={handleSubmit} className="card-corporate p-8 space-y-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div className="space-y-2">
-          <Label htmlFor="name" className="text-sm text-text-muted">
+          <Label htmlFor="name" className="text-sm text-text-secondary">
             Name
           </Label>
           <Input
@@ -117,11 +117,11 @@ export function ContactForm() {
             name="name"
             required
             placeholder="Your full name"
-            className="bg-bg-subtle border-border text-text-primary placeholder:text-text-muted/50"
+            className="bg-bg-secondary border-border text-text-primary placeholder:text-text-muted/50"
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="email" className="text-sm text-text-muted">
+          <Label htmlFor="email" className="text-sm text-text-secondary">
             Email
           </Label>
           <Input
@@ -130,13 +130,13 @@ export function ContactForm() {
             type="email"
             required
             placeholder="your@email.com"
-            className="bg-bg-subtle border-border text-text-primary placeholder:text-text-muted/50"
+            className="bg-bg-secondary border-border text-text-primary placeholder:text-text-muted/50"
           />
         </div>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="subject" className="text-sm text-text-muted">
+        <Label htmlFor="subject" className="text-sm text-text-secondary">
           Subject
         </Label>
         <Input
@@ -144,12 +144,12 @@ export function ContactForm() {
           name="subject"
           required
           placeholder="How can we help?"
-          className="bg-bg-subtle border-border text-text-primary placeholder:text-text-muted/50"
+          className="bg-bg-secondary border-border text-text-primary placeholder:text-text-muted/50"
         />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="message" className="text-sm text-text-muted">
+        <Label htmlFor="message" className="text-sm text-text-secondary">
           Message
         </Label>
         <Textarea
@@ -158,7 +158,7 @@ export function ContactForm() {
           required
           rows={5}
           placeholder="Tell us about your requirements..."
-          className="bg-bg-subtle border-border text-text-primary placeholder:text-text-muted/50 resize-none"
+          className="bg-bg-secondary border-border text-text-primary placeholder:text-text-muted/50 resize-none"
         />
       </div>
 
@@ -166,7 +166,7 @@ export function ContactForm() {
       <div ref={turnstileRef} />
 
       {status === "error" && (
-        <div className="flex items-center gap-2 text-sm text-facet-red">
+        <div className="flex items-center gap-2 text-sm text-red-600">
           <AlertCircle className="h-4 w-4" />
           {errorMsg}
         </div>
@@ -175,7 +175,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold rounded-lg bg-facet-amber text-bg-primary hover:bg-facet-amber/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold rounded-lg bg-corp-navy text-white hover:bg-corp-navy/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {status === "loading" ? "Sending..." : "Send Message"}
         <Send className="h-4 w-4" />

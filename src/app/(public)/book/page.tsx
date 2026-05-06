@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { BookingForm } from "@/components/booking-form";
-import { Clock, Shield, Phone } from "lucide-react";
+import { Clock, Shield, Phone, ChevronRight } from "lucide-react";
 
 export default function BookPage() {
   return (
@@ -16,13 +16,16 @@ export default function BookPage() {
             transition={{ duration: 0.5 }}
             className="max-w-3xl"
           >
-            <h1 className="text-4xl sm:text-5xl font-bold heading-tight mb-6">
+            <p className="text-sm font-semibold text-corp-blue uppercase tracking-widest mb-3">
+              Schedule a Call
+            </p>
+            <h1 className="text-4xl sm:text-5xl font-bold heading-tight mb-6 text-text-primary">
               Book a{" "}
-              <span className="diamond-gradient-text">Consultation</span>
+              <span className="text-corp-blue">Consultation</span>
             </h1>
-            <p className="text-lg text-text-muted leading-relaxed">
-              Schedule a call with our team to discuss your regulatory
-              technology needs. Choose a service, pick a time, and we&apos;ll
+            <p className="text-lg text-text-secondary leading-relaxed">
+              Schedule a call with our team to discuss your solution
+              requirements. Choose a service, pick a time, and we&apos;ll
               confirm your appointment.
             </p>
           </motion.div>
@@ -52,46 +55,59 @@ export default function BookPage() {
               transition={{ delay: 0.1, duration: 0.5 }}
               className="space-y-6"
             >
-              <div className="glass rounded-xl p-6">
+              <div className="card-corporate p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <Clock className="h-5 w-5 text-facet-amber" />
-                  <h3 className="text-sm font-semibold text-text-primary">
+                  <div className="flex items-center justify-center h-9 w-9 rounded-lg bg-corp-blue-pale border border-corp-blue/10">
+                    <Clock className="h-4 w-4 text-corp-blue" />
+                  </div>
+                  <h3 className="text-sm font-bold text-text-primary">
                     Availability
                   </h3>
                 </div>
-                <p className="text-sm text-text-muted">
+                <p className="text-sm text-text-secondary">
                   Monday to Friday, 9:00 AM — 5:00 PM (UK time). We aim to
                   confirm all bookings within 2 hours during business hours.
                 </p>
               </div>
 
-              <div className="glass rounded-xl p-6">
+              <div className="card-corporate p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <Shield className="h-5 w-5 text-facet-green" />
-                  <h3 className="text-sm font-semibold text-text-primary">
+                  <div className="flex items-center justify-center h-9 w-9 rounded-lg bg-corp-blue-pale border border-corp-blue/10">
+                    <Shield className="h-4 w-4 text-corp-blue" />
+                  </div>
+                  <h3 className="text-sm font-bold text-text-primary">
                     What to Expect
                   </h3>
                 </div>
-                <ul className="text-sm text-text-muted space-y-2">
-                  <li>30-minute consultation call</li>
-                  <li>Discussion of your requirements</li>
-                  <li>Platform demonstration if requested</li>
-                  <li>No obligation or commitment</li>
+                <ul className="space-y-2.5">
+                  {[
+                    "30-minute consultation call",
+                    "Discussion of your requirements",
+                    "Solution demonstration if requested",
+                    "No obligation or commitment",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-2.5">
+                      <ChevronRight className="h-3.5 w-3.5 text-corp-blue mt-0.5 shrink-0" />
+                      <span className="text-sm font-medium text-text-secondary">{item}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
 
-              <div className="glass rounded-xl p-6">
+              <div className="card-corporate p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <Phone className="h-5 w-5 text-facet-blue" />
-                  <h3 className="text-sm font-semibold text-text-primary">
+                  <div className="flex items-center justify-center h-9 w-9 rounded-lg bg-corp-blue-pale border border-corp-blue/10">
+                    <Phone className="h-4 w-4 text-corp-blue" />
+                  </div>
+                  <h3 className="text-sm font-bold text-text-primary">
                     Prefer to Call?
                   </h3>
                 </div>
-                <p className="text-sm text-text-muted">
+                <p className="text-sm text-text-secondary">
                   Reach us directly on{" "}
                   <a
                     href="tel:+447465991845"
-                    className="text-facet-amber hover:underline font-medium"
+                    className="text-corp-blue hover:underline font-semibold"
                   >
                     +44 7465 991845
                   </a>
