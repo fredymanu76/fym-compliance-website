@@ -36,38 +36,38 @@ export function Hero() {
             className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 rounded-full bg-white/10 border border-white/20 text-xs font-medium text-white/80"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-corp-blue-light animate-pulse" />
-            UK-incorporated solutions provider
+            UK-incorporated regulatory advisory
           </motion.div>
 
           {/* Headline */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold heading-tight leading-[1.1] mb-6 text-white">
-            Delivering Solutions for{" "}
+            Regulatory Infrastructure, Authorisation, and Compliance{" "}
             <span className="text-corp-blue-light">
-              Regulated Institutions
+              Built for Modern Financial and Digital Businesses
             </span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg sm:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto mb-10">
-            We deliver the solutions that power regulated institutions.
-            From FCA compliance platforms to specialist industry solutions —
-            designed, delivered, and maintained in-house.
+          <p className="text-lg sm:text-xl text-white/80 leading-relaxed max-w-3xl mx-auto mb-10">
+            FYM Compliance delivers FCA authorisation, compliance frameworks,
+            and regulatory strategy&mdash;while powering scalable business
+            infrastructure through the Regnexus platform.
           </p>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="/contact"
+              href="/book"
               className="inline-flex items-center gap-2 px-7 py-3.5 text-sm font-semibold rounded-lg bg-white text-corp-navy hover:bg-white/90 transition-colors"
             >
-              Discuss Your Requirements
+              Book a Consultation
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/solutions"
               className="inline-flex items-center gap-2 px-7 py-3.5 text-sm font-semibold rounded-lg border border-white/30 text-white hover:bg-white/10 transition-colors"
             >
-              View Solutions
+              Explore Our Solutions
             </Link>
           </div>
         </motion.div>

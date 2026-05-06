@@ -16,19 +16,28 @@ export function CtaSection() {
           className="gradient-blue rounded-2xl p-10 sm:p-16 text-center"
         >
           <h2 className="text-2xl sm:text-3xl font-bold heading-tight mb-4 text-white">
-            Ready to discuss your requirements?
+            Engage Early. Execute with Precision.
           </h2>
-          <p className="text-white/80 text-base max-w-xl mx-auto mb-8">
-            Whether you need a bespoke regulatory solution, specialist industry
-            platform, or advisory services — we deliver.
+          <p className="text-white/80 text-base max-w-2xl mx-auto mb-8">
+            Whether you are seeking FCA authorisation, strengthening compliance,
+            or building scalable infrastructure, early engagement reduces risk
+            and accelerates outcomes.
           </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold rounded-lg bg-white text-corp-navy hover:bg-white/90 transition-colors"
-          >
-            Get in Touch
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/book"
+              className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold rounded-lg bg-white text-corp-navy hover:bg-white/90 transition-colors"
+            >
+              Book a Consultation
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold rounded-lg border border-white/30 text-white hover:bg-white/10 transition-colors"
+            >
+              Contact Us
+            </Link>
+          </div>
         </motion.div>
       </div>
     </section>

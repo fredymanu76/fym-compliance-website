@@ -42,9 +42,8 @@ export function Footer() {
               </span>
             </div>
             <p className="text-sm text-white/70 leading-relaxed">
-              Premier solutions provider for regulated industries. UK-incorporated,
-              delivering compliant solutions for financial services and specialist
-              sectors.
+              Regulatory Advisory and Infrastructure Solutions. Part of the
+              Regnexus ecosystem.
             </p>
           </div>
 
